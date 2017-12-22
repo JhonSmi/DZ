@@ -1,0 +1,11 @@
+<html>
+    <head>Группы товаров</head>
+    <bode>
+        <h1>Группы товаров</h1>
+        <ul>
+            {% for g in allgroups %}
+                <li><a href="{% url "store:group" g.pk %}">{{g.title}}</a></li>
+            {% endfor %}
+        </ul>
+    </bode>
+</html>    

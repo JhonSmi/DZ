@@ -1,0 +1,12 @@
+<html>
+<head><title>Группа {{g.title}}</title></head>
+    <bode>
+        <table border="1">
+        	<tr><td>Наименование</td><td>{{g.title}}</td></tr>
+        	<tr><td>Лицо</td><td>{{g.responser}}</td></tr>
+        	<tr><td>Дата создания</td><td>{{g.created}}</td></tr>
+        	<tr><td>Примечание</td><td>{{g.comment}}</td></tr>
+        </table>
+        <p><a href="{% url "store:groups" %}">Назад к списку</a></p>
+    </bode>
+</html>     
