@@ -1,12 +1,20 @@
 <html>
 <head><title>Секция {{g.title}}</title></head>
     <bode>
+    <form method="POST">
+    	{% csrf_token %}
         <table border="1">
-        	<tr><td>Название секции</td><td>{{g.title}}</td></tr>
+        	<tr><td>Название секции</td><td>
+        	<input type="text" name="title" value="{{g.title}}">
+        	{{g.title}}
+        	</td></tr>
         	<tr><td>Тренер</td><td>{{g.teacher}}</td></tr>
         	<tr><td>Время проведения тренировок</td><td>{{g.datetime}}</td></tr>
         	<tr><td>Уровень</td><td>{{g.level}}</td></tr>
         </table>
+    <input type="submit" value="Сохранить">
+    <input type="reset" value="Очистить">        
+    </form>
         <p><a href="{% url "store:groups" %}">Назад к списку</a></p>
     </bode>
 </html>     

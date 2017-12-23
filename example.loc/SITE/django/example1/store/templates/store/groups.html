@@ -1,10 +1,20 @@
 <html>
-    <head>Группы товаров</head>
+    <head>
+    	<title>Спортивные секции</title>
+    </head>
     <bode>
-        <h1>Группы товаров</h1>
+        <h1>Спортивные секции</h1>
         <ul>
             {% for g in allgroups %}
-                <li><a href="{% url "store:group" g.pk %}">{{g.title}}</a></li>
+                <li>
+                    {{g.title}} 
+                    &mdash;
+                        <a href="{% url "store:group" g.pk %}">{{g.title}}
+                        Просмотреть
+                        </a>
+                        &mdash;
+                        <a href="{% url "store:groupedit" g.pk %}">редактировать</a>
+                </li>
             {% endfor %}
         </ul>
     </bode>
