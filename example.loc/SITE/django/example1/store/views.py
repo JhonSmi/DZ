@@ -1,48 +1,27 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from helpers.multirequest import multirequest
+from helpers.serviceLayer import serviceGroup
 
 from .models import *
 from .forms import *
 
 ############################Section########################################
-def groups(request):
-    allgroups = Section.objects.all()
-    return render (request, 'store/groups.html', locals())
+def groups(request):	
+    return serviceGroup.getGroups(request)
 
 def group (request, iid):
-	g = Section.objects.get( pk = iid )
-	allst = Student.objects.filter( sectionStudent_id__exact = iid)
-	return render (request, 'store/groupview.html', locals())
-
+	return serviceGroup.getGroup(request, iid)
 
 @multirequest
 def groupedit(request, iid):
-	g = get_object_or_404( Section, pk=iid)
-	form = SectionForm (instance = g)
-	return render (request, 'store/groupedit.html', locals())
+	return serviceGroup.makeGroupedit(request, iid)
 		
 @groupedit.POST
 def groupedit (request, iid):
-	g = get_object_or_404( Section, pk=iid)
-	form = SectionForm (instance = g)
-	form = SectionForm(request.POST)
-	if form.is_valid() :
-		g = get_object_or_404 (Section, pk=iid)
-		g.title = form.cleaned_data['title']
-		g.teacher = form.cleaned_data['teacher']
-		#g.datetime = form.cleaned_data['datetime']
-		g.level = form.cleaned_data['level']
-		g.save()
-		return redirect ('store:groups')
-	else :
-		return render (request, 'store/groupedit.html', locals())
-		#return redirect ('store:groupedit',  iid)
+	return serviceGroup.makeGroupeditPost(request, iid)	
 
 def groupdelete( request, iid):
-	g = get_object_or_404( Section, pk=iid)
-	g.delete()
-	return redirect ('store:groups')
-
+	return serviceGroup.makeGroupdelete(request, iid)
 ###########################Students############################
 
 def students(request):
@@ -77,3 +56,7 @@ def studentedit (request, iid):
 		return render (request, 'store/studentedit.html', locals())
 		#return redirect ('store:groupedit',  iid)
 		
+#######################################################################
+
+
+    
