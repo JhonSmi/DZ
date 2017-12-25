@@ -7,6 +7,17 @@
         	<tr><td>Время проведения тренировок</td><td>{{g.datetime}}</td></tr>
         	<tr><td>Уровень</td><td>{{g.level}}</td></tr>
         </table>
-        <p><a href="{% url "store:groups" %}">Назад к списку</a></p>
+        <ul>
+        	{% for s in allst %}
+        		<li>
+                    {{s.fioStudent}} 
+                    &mdash;
+                    <a href="{% url "store:student" s.pk %}">Просмотреть</a>
+                    &mdash;
+                    <a href="{% url "store:studentedit" s.pk %}">Редактировать</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <p><a href="{% url "store:groups" %}">Назад к списку секций</a></p>
     </bode>
 </html>     

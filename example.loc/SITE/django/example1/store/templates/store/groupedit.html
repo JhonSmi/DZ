@@ -3,18 +3,37 @@
     <bode>
     <form method="POST">
     	{% csrf_token %}
+    	{{ form.non_field_errors }}
         <table border="1">
-        	<tr><td>Название секции</td><td>
-        	<input type="text" name="title" value="{{g.title}}">
-        	{{g.title}}
-        	</td></tr>
-        	<tr><td>Тренер</td><td>{{g.teacher}}</td></tr>
-        	<tr><td>Время проведения тренировок</td><td>{{g.datetime}}</td></tr>
-        	<tr><td>Уровень</td><td>{{g.level}}</td></tr>
+        	<tr>
+        	<td>{{ form.title.label_tag }}</td>
+        	<td>{{ form.title}}</td>
+        	<td>{{ form.title.errors }}</td>
+        	</tr>
+        	<tr>
+        	<td>{{ form.teacher.label_tag }}</td>
+        	<td>{{ form.teacher}}</td>
+        	<td>{{ form.teacher.errors }}</td>
+        	</tr>
+        	<tr>
+        	<td>{{ form.datetime.label_tag }}</td>
+        	<td>{{ form.datetime}}</td>
+        	<td>{{ form.datetime.errors }}</td>
+        	</tr>
+        	<tr>
+        	<td>{{ form.level.label_tag }}</td>
+        	<td>{{ form.level}}</td>
+        	<td>{{ form.level.errors }}</td>
+        	</tr>
         </table>
+        <br>
     <input type="submit" value="Сохранить">
     <input type="reset" value="Очистить">        
     </form>
-        <p><a href="{% url "store:groups" %}">Назад к списку</a></p>
+    <form action="{% url "store:groupdelete" g.pk%}" method="DELETE">
+    	{% csrf_token %}
+    	<p><button formmethod="DELETE">Удалить</button></p>
+    </form>
+        <p><a href="{% url "store:groups" %}">Назад к списку секций</a></p>
     </bode>
 </html>     

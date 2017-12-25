@@ -1,0 +1,40 @@
+<html>
+<head><title>Cтудент {{s.c}}</title></head>
+    <bode>
+    <form method="POST">
+    	{% csrf_token %}
+    	{{ form.non_field_errors }}
+        <table border="1">
+        	<tr>
+        	<td>{{ form.fioStudent.label_tag }}</td>
+        	<td>{{ form.fioStudent}}</td>
+        	<td>{{ form.fioStudent.errors }}</td>
+        	</tr>
+        	<tr>
+        	<td>{{ form.faculty.label_tag }}</td>
+        	<td>{{ form.faculty}}</td>
+        	<td>{{ form.faculty.errors }}</td>
+        	</tr>
+        	<tr>
+        	<td>{{ form.healthGroup.label_tag }}</td>
+        	<td>{{ form.healthGroup}}</td>
+        	<td>{{ form.healthGroup.errors }}</td>
+        	</tr>
+        <table>
+        <br>
+        <table border="1">
+        	<tr>
+        	<td>{{ form.sectionStudent.label_tag }}</td>
+        	<td>{{ form.sectionStudent}}</td>
+        	<td>{{ form.sectionStudent.errors }}</td>
+        	</tr>
+        </table>
+        <br>
+    <input type="submit" value="Сохранить">
+    <input type="reset" value="Очистить">        
+    </form>
+        <p><a href="{% url "store:students" %}">Назад к cписку студентов</a></p>
+        <p><a href="{% url "store:group" s.sectionStudent_id%}">Назад к секции</a></p>
+    </bode>
+</html>     
+ 

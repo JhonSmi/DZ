@@ -1,0 +1,13 @@
+<html>
+<head><title>Студент {{student.fioStudent}}</title></head>
+    <bode>
+        <table border="1">
+        	<tr><td>Ф.И.О</td><td>{{student.fioStudent}}</td></tr>
+        	<tr><td>Факультет</td><td>{{student.faculty}}</td></tr>
+        	<tr><td>Группа здоровья</td><td>{{student.healthGroup}}</td></tr>
+        </table>
+        <p><a href="{% url "store:students" %}">Назад к списку студентов</a></p>
+        <p><a href="{% url "store:group" student.sectionStudent_id %}">Назад к секции</a></p>
+    </bode>
+</html>     
+ 

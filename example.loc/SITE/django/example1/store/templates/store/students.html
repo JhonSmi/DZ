@@ -1,0 +1,19 @@
+<html>
+    <head>
+    	<title>Список студентов</title>
+    </head>
+    <bode>
+        <h1>Список студентов</h1>
+        <ul>
+            {% for s in allstudents %}
+                <li>
+                   {{s.fioStudent}} 
+                    <a href="{% url "store:student" s.pk %}">Просмотреть</a>
+                    &mdash;
+                    <a href="{% url "store:studentedit" s.pk %}">Редактировать</a>
+                </li>
+            {% endfor %}
+        </ul>
+         <a href="{% url "store:groups" %}"><h1>Список секций</h1></a>
+    </bode>
+</html>     

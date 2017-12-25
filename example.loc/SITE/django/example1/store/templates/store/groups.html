@@ -9,13 +9,12 @@
                 <li>
                     {{g.title}} 
                     &mdash;
-                        <a href="{% url "store:group" g.pk %}">{{g.title}}
-                        Просмотреть
-                        </a>
-                        &mdash;
-                        <a href="{% url "store:groupedit" g.pk %}">редактировать</a>
+                    <a href="{% url "store:group" g.pk %}">Просмотреть</a>
+                    &mdash;
+                    <a href="{% url "store:groupedit" g.pk %}">Редактировать</a>
                 </li>
             {% endfor %}
         </ul>
+         <a href="{% url "store:students" %}"><h1>Список студентов</h1></a>
     </bode>
 </html>    
