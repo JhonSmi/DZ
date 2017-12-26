@@ -70,11 +70,12 @@ class StudentGateway(object):
 			self.sectionStudent = kwargs["sectionStudent"]
 		self.RowStudent = []
 
-    
-	sectionStudent = property (lambda self: self.healthGroup)
+	def getIid (self):
+		return self.iid
 
 	def findRowStudent(self):
 		self.RowStudent = sm.Student.objects.filter( sectionStudent_id__exact = self.sectionStudent)
+		return self.RowStudent
 
 	def getRowStudent(self):
 		self.RowStudent = sm.Student.objects.get( pk = self.iid )
@@ -117,8 +118,12 @@ class AttendanceGateway(object):
 		if "attendance" in kwargs:
 			self.attendance = kwargs["attendance"]
 		if "studentAttend" in kwargs:
-			self.studentAttend = kwargs["studentAttend"]
+			self.studentAttend = int(kwargs["studentAttend"])
 		self.RowAttendance = []
+
+	def findRowAttendan(self):
+		self.RowAttendance = sm.Attendance.objects.filter( studentAttend_id__exact = self.studentAttend)
+		return self.RowAttendance
 
 	def getRowAttendance(self):
 		self.RowAttendance = sm.Attendance.objects.get( pk = self.iid )

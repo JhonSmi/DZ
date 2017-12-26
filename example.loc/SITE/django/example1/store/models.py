@@ -9,7 +9,7 @@ class Section (models.Model):
     # icon
     
     def __str__(self):
-    	return '({0.level}) {0.title}'.format(self)
+    	return '{0.title}'.format(self)
 
 class Student (models.Model):
 	fioStudent     = models.CharField ( max_length=255, null=False, blank=False )

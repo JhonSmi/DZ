@@ -21,7 +21,7 @@ class StudentForm(forms.ModelForm):
  			'fioStudent'  	 : 'Ф.И.О',
  			'faculty'  	     : 'Факультет',
  			'healthGroup' 	 : 'Группа здоровья',
- 			'sectionStudent' : 'Записать в секцию'
+ 			'sectionStudent' : 'Секция'
  			
  		}
 
