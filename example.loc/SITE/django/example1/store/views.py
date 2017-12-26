@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from helpers.multirequest import multirequest
-from helpers.serviceLayer import serviceGroup
+from helpers.serviceLayer import serviceGroup, serviceStudent
 
 from .models import *
 from .forms import *
@@ -25,50 +25,23 @@ def groupdelete( request, iid):
 ###########################Students############################
 
 def students(request):
-    allstudents = Student.objects.all()
-    return render (request, 'store/students.html', locals())
+    return serviceStudent.getStudents(request)
+    
 
 def student (request, iid):
-	student = Student.objects.get( pk = iid )
-	att = Attendance.objects.filter(studentAttend_id__exact = iid )
-	return render (request, 'store/studentview.html', locals())
+	return serviceStudent.getStudent(request, iid)
 
 
 @multirequest
 def studentedit(request, iid):
-	s = get_object_or_404( Student, pk=iid)
-	form = StudentForm (instance = s)
-	return render (request, 'store/studentedit.html', locals())
+	return serviceStudent.makeStudentedit(request, iid)	 
 
 @studentedit.POST
 def studentedit (request, iid):
-	s = get_object_or_404( Student, pk=iid)
-	form = StudentForm (instance = s)
-	form = StudentForm(request.POST)
-	if form.is_valid() :
-		s = get_object_or_404 (Student, pk=iid)
-		s.fioStudent = form.cleaned_data['fioStudent']
-		s.faculty = form.cleaned_data['faculty']
-		s.healthGroup = form.cleaned_data['healthGroup']
-		s.sectionStudent = form.cleaned_data['sectionStudent']
-		s.save()
-		return redirect ('store:students')
-	else :
-		return render (request, 'store/studentedit.html', locals())
-		#return redirect ('store:groupedit',  iid)
+	return serviceStudent.makeStudenteditPost(request, iid)
+		
 		
 #######################################################################
 
 
 
-def attendanceedit(request):
-	if request.method == "POST":
-		form = AttendanceeditForm(request.POST)
-		if form.is_valid() :
-			a = form.save()
-			a.attendance = form.cleaned_attendance['attendance']
-			a.attendanceStudent = form.cleaned_attendanceStudent['attendanceStudent']
-			a.save()
-	else :
-		form = AttendanceeditForm()
-	return render(request, 'store/attendanceedit.html', {'form': form})

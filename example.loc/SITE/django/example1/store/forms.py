@@ -25,6 +25,10 @@ class StudentForm(forms.ModelForm):
  			
  		}
 
-
+class AttendanceForm (forms.ModelForm):
+	class Meta :
+		model = Attendance
+		fields = '__all__'
+		
 	
 		

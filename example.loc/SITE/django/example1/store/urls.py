@@ -10,5 +10,4 @@ urlpatterns = [
    url( r'^students$',views.students, name ='students'  ),
    url( r'^student/(?P<iid>\d+)$',views.student, name ='student' ),
    url( r'^studentedit/(?P<iid>\d+)$', views.studentedit, name='studentedit'),
-   
 ]

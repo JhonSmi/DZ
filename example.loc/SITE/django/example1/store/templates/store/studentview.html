@@ -5,14 +5,38 @@
         	<tr><td>Ф.И.О</td><td>{{student.fioStudent}}</td></tr>
         	<tr><td>Факультет</td><td>{{student.faculty}}</td></tr>
         	<tr><td>Группа здоровья</td><td>{{student.healthGroup}}</td></tr>
+        	<tr><td>Группа здоровья</td><td>{{student.id}}</td></tr>
         </table>
         <p><a href="{% url "store:students" %}">Назад к списку студентов</a></p>
         <p><a href="{% url "store:group" student.sectionStudent_id %}">Назад к секции</a></p>
         <ul>
+        <form method="POST">
+				    	{% csrf_token %}
+				    	{{ form.non_field_errors }}
+				        <table border="1">
+				        	<tr>
+				        	<td>{{ form.date.label_tag }}</td>
+				        	<td>{{ form.date}}</td>
+				        	<td>{{ form.date.errors }}</td>
+				        	</tr>
+				        	<tr>
+				        	<td>{{ form.attendance.label_tag }}</td>
+				        	<td>{{ form.attendance}}</td>
+				        	<td>{{ form.attendance.errors }}</td>
+				        	</tr>
+				        	<tr>
+				        	<td>{{ form.studentAttend.label_tag }}</td>
+				        	<td>{{ form.studentAttend}}</td>
+				        	<td>{{ form.studentAttend.errors }}</td>
+				        	</tr>
+				        <table>
+					    <input type="submit" value="Отметить">
+					    <input type="reset" value="Очистить">        
+	    </form>
         	{% for a in att %}
         		<li>
                     {{a.date}}
-                    {{a.attendance}} 
+                    {{a.attendance}}
                 </li>
             {% endfor %}
         </ul>

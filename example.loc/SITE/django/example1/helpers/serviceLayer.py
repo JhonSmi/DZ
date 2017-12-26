@@ -40,4 +40,45 @@ class serviceGroup (object):
  		g.deleteRowGroup()
  		return redirect ('store:groups')
 
+################################################################################################################3
 
+class serviceStudent(object):
+	
+	def getStudents(request):
+		allstudents = sm.Student.objects.all()
+		return render (request, 'store/students.html', locals())
+ 	
+	def getStudent(request, iid):
+		student = sm.Student.objects.get( pk = iid )
+		att = sm.Attendance.objects.filter(studentAttend_id__exact = iid )
+		if request.method == "POST":
+			form = fm.AttendanceForm(request.POST)
+			if form.is_valid() :
+				attAdd = form.save(commit = False)
+				attAdd.date = form.cleaned_data['date']
+				attAdd.attendance = form.cleaned_data['attendance']
+				attAdd.studentAttend = form.cleaned_data['studentAttend']
+				attAdd.save()
+		else:
+			form = fm.AttendanceForm()	
+		return render (request, 'store/studentview.html', locals())
+
+	def makeStudentedit(request, iid):
+ 		s = get_object_or_404( sm.Student, pk=iid)
+ 		form = fm.StudentForm (instance = s)
+ 		return render (request, 'store/studentedit.html', locals()) 
+
+	def makeStudenteditPost (request, iid):
+		s = get_object_or_404( sm.Student, pk=iid)
+		form = fm.StudentForm (instance = s)
+		form = fm.StudentForm(request.POST)
+		if form.is_valid() :
+			s = get_object_or_404 (sm.Student, pk=iid)
+			s.fioStudent = form.cleaned_data['fioStudent']
+			s.faculty = form.cleaned_data['faculty']
+			s.healthGroup = form.cleaned_data['healthGroup']
+			s.sectionStudent = form.cleaned_data['sectionStudent']
+			s.save()
+			return redirect ('store:students')
+		else :
+			return render (request, 'store/studentedit.html', locals())
