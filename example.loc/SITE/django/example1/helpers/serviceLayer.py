@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 import store.models as sm
 import store.forms  as fm
-from helpers.rowDataGateway import GroupGateway
+from helpers.rowDataGateway import GroupGateway,StudentGateway
 
 class serviceGroup (object):
  	
@@ -11,7 +11,8 @@ class serviceGroup (object):
 
  	def getGroup(request, iid):
  		gr =  GroupGateway(iid = iid)
- 		g = gr.getRowGroup()                                                                 #sm.Section.objects.get( pk = iid )
+ 		g = gr.getRowGroup()
+ 		g_pk = gr.getIid()                                                                #sm.Section.objects.get( pk = iid )
  		allst = sm.Student.objects.filter( sectionStudent_id__exact = iid)
  		return render (request, 'store/groupview.html', locals())
 
@@ -49,8 +50,8 @@ class serviceStudent(object):
 		return render (request, 'store/students.html', locals())
  	
 	def getStudent(request, iid):
-		student = sm.Student.objects.get( pk = iid )
-		att = sm.Attendance.objects.filter(studentAttend_id__exact = iid )
+		student = sm.Student.objects.get( pk = iid)
+		att = sm.Attendance.objects.filter(studentAttend_id__exact = iid)
 		if request.method == "POST":
 			form = fm.AttendanceForm(request.POST)
 			if form.is_valid() :
