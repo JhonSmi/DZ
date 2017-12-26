@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from helpers.multirequest import multirequest
 from helpers.serviceLayer import serviceGroup
+from .forms import AttendanceeditForm
 
 from .models import *
 from .forms import *
@@ -58,5 +59,14 @@ def studentedit (request, iid):
 		
 #######################################################################
 
-
-    
+def attendanceedit(request):
+	if request.method == "POST":
+		form = AttendanceeditForm(request.POST)
+		if form.is_valid() :
+			a = form.save()
+			a.attendance = form.cleaned_attendance['attendance']
+			a.attendanceStudent = form.cleaned_attendanceStudent['attendanceStudent']
+			a.save()
+	else :
+		form = AttendanceeditForm()
+	return render(request, 'store/attendanceedit.html', {'form': form})

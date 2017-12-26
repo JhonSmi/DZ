@@ -20,6 +20,7 @@ class Student (models.Model):
 	def __str__(self):
 		return '({0.healthGroup}) {0.fioStudent}'.format(self)
 
-class Attendance(object):
-    pass
-        
+class AttendanceSt(models.Model):
+    date = models.DateField (null = True)
+    attendance = models.CharField ( max_length=255, null=False, blank=False )
+    attendanceStudent = models.ForeignKey ('Student', null = True)

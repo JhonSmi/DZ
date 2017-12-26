@@ -24,3 +24,15 @@ class StudentForm(forms.ModelForm):
  			'sectionStudent' : 'Записать в секцию'
  			
  		}
+
+class AttendanceeditForm (forms.ModelForm):
+	class Meta :
+		model = AttendanceSt
+		fields = '__all__'
+		labels = {
+			'date'  : 'Дата занятия',
+			'attendance' : 'Присутствие',
+			'attendanceStudent'  :  'для студента:'
+		}
+	
+		
