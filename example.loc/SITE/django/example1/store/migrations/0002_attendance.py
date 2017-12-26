@@ -12,12 +12,12 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='AttendanceSt',
+            name='Attendance',
             fields=[
-                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
-                ('date', models.DateField(null=True)),
+                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
+                ('date', models.DateField()),
                 ('attendance', models.CharField(max_length=255)),
+                ('studentAttend', models.ForeignKey(null=True, to='store.Student')),
             ],
         ),
-        
     ]

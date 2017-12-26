@@ -8,8 +8,8 @@ class Section (models.Model):
     level       = models.IntegerField(null=False,default=0)
     # icon
     
-    #def __str__(self):
-    	#return '({0.level}) {0.title}'.format(self)
+    def __str__(self):
+    	return '({0.level}) {0.title}'.format(self)
 
 class Student (models.Model):
 	fioStudent     = models.CharField ( max_length=255, null=False, blank=False )
@@ -20,7 +20,8 @@ class Student (models.Model):
 	def __str__(self):
 		return '({0.healthGroup}) {0.fioStudent}'.format(self)
 
-class AttendanceSt(models.Model):
-    date = models.DateField (null = True)
-    attendance = models.CharField ( max_length=255, null=False, blank=False )
-    attendanceStudent = models.ForeignKey ('Student', null = True)
+
+class Attendance(models.Model):
+    date          = models.DateField (null = False)
+    attendance    = models.CharField ( max_length=255, null=False, blank=False )
+    studentAttend = models.ForeignKey ('Student', null = True)

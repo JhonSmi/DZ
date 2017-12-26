@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import datetime
 
 
 class Migration(migrations.Migration):
@@ -14,11 +13,21 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Section',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
                 ('title', models.CharField(unique=True, max_length=255)),
                 ('teacher', models.CharField(null=True, max_length=255)),
-                ('datetime', models.DateTimeField(default=datetime.datetime(2017, 12, 22, 21, 27, 20, 163756), verbose_name='data created')),
+                ('datetime', models.CharField(null=True, max_length=255)),
                 ('level', models.IntegerField(default=0)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Student',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
+                ('fioStudent', models.CharField(max_length=255)),
+                ('faculty', models.CharField(max_length=255)),
+                ('healthGroup', models.IntegerField(default=0)),
+                ('sectionStudent', models.ForeignKey(null=True, to='store.Section')),
             ],
         ),
     ]

@@ -9,3 +9,7 @@ class SectionAdmin(admin.ModelAdmin):
 @admin.register (Student)
 class StudentAdmin(admin.ModelAdmin):
  	pass
+
+@admin.register (Attendance)
+class AttendanceAdmin(admin.ModelAdmin):
+	pass

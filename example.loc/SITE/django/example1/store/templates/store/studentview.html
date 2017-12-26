@@ -8,6 +8,14 @@
         </table>
         <p><a href="{% url "store:students" %}">Назад к списку студентов</a></p>
         <p><a href="{% url "store:group" student.sectionStudent_id %}">Назад к секции</a></p>
+        <ul>
+        	{% for a in att %}
+        		<li>
+                    {{a.date}}
+                    {{a.attendance}} 
+                </li>
+            {% endfor %}
+        </ul>
     </bode>
 </html>     
  
